@@ -19,7 +19,9 @@
                 <RadioButton >По дате</RadioButton>
             </MenuItem>
         </Menu>
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" >
+
+        <StackPanel DockPanel.Dock="Right" Width="200" HorizontalAlignment="Right">
+            <TextBlock>TestText</TextBlock>
             <Button Margin="1" >Запустить</Button>
             <Button Margin="1" >Папка</Button>
             <Button Margin="1" >Debug</Button>
@@ -40,6 +42,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
     </DockPanel>
 </Window>
