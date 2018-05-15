@@ -8,6 +8,7 @@ namespace VSProjectManager.Model
         public string Path { get; set; }
         public bool IsProject { get; set; }
         public DateTime AccessTime { get; set; }
+        
 
         public double TimeAgo
         {

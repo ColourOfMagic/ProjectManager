@@ -6,41 +6,55 @@
         xmlns:local="clr-namespace:VSProjectManager"
         xmlns:vm="clr-namespace:VSProjectManager.ViewModel" 
         mc:Ignorable="d"
-        Title="VSProjectManager" Height="450" Width="664.662">
+        Title="VSProjectManager" Height="422" Width="575.662">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
-    
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" >
             <MenuItem Header="Обновить" ></MenuItem>
+            <MenuItem Header="Инструменты">
+                <CheckBox Content="Расширенная панель" ></CheckBox>
+            </MenuItem>
             <MenuItem Header="Сортировка">
-                <RadioButton >По имени</RadioButton>
-                <RadioButton >По дате</RadioButton>
+                <RadioButton Name="NameRB" Content="По имени" Command="{Binding Sort}" CommandParameter="{Binding ElementName=NameRB, Path=Content}"/>
+                <RadioButton Name="DateRB" Content="По дате" Command="{Binding Sort}" CommandParameter="{Binding ElementName=DateRB, Path=Content}"/>
             </MenuItem>
         </Menu>
-
-        <StackPanel DockPanel.Dock="Right" Width="200" HorizontalAlignment="Right">
-            <TextBlock>TestText</TextBlock>
-            <Button Margin="1" >Запустить</Button>
-            <Button Margin="1" >Папка</Button>
-            <Button Margin="1" >Debug</Button>
-            <Button Margin="1" >Release</Button>
-        </StackPanel>
-        <ListBox Name="LB" ItemsSource="{Binding Projects}" SelectedIndex="{Binding FocusId}">
+        <GridSplitter Grid.Column="1" Grid.Row="1" ShowsPreview="False" Width="3"
+        HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+        <ListBox Name="LB" ItemsSource="{Binding Projects}" SelectedIndex="{Binding FocusId}" Grid.Row="1">
             <ListBox.ItemTemplate >
                 <DataTemplate>
                     <DockPanel>
                         <TextBlock Name="PrName" Text="{Binding Name}" FontSize="20" Grid.Column="0" DockPanel.Dock="Left" ></TextBlock>
                         <TextBlock DockPanel.Dock="Right" Text="{Binding TimeAgo, StringFormat={}{0:F1} д.н. }" ></TextBlock>
                     </DockPanel>
-                    <DataTemplate.Triggers>
-                        <DataTrigger Binding="{Binding IsProject}" Value="true">
-                            <Setter TargetName="PrName" Property="Foreground" Value="#FF21CF21"></Setter>
-                        </DataTrigger>
-                    </DataTemplate.Triggers>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </DockPanel>
+
+
+        <StackPanel Width="200" Grid.Row="1" Grid.Column="2" >
+            <StackPanel.Background>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuBarColorKey}}"/>
+            </StackPanel.Background>
+            <TextBlock>TestText</TextBlock>
+            <Button Margin="1" >Запустить</Button>
+            <Button Margin="1" >Папка</Button>
+            <Button Margin="1" >Debug</Button>
+            <Button Margin="1" >Release</Button>
+        </StackPanel>
+    </Grid>
 </Window>
