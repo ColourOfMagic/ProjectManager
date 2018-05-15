@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VSProjectManager"
         xmlns:vm="clr-namespace:VSProjectManager.ViewModel" 
         mc:Ignorable="d"
-        Title="VSProjectManager" Height="422" Width="575.662">
+        Title="VSProjectManager" Height="451" Width="575.662">
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
@@ -23,9 +23,10 @@
         </Grid.ColumnDefinitions>
 
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" >
-            <MenuItem Header="Обновить" ></MenuItem>
-            <MenuItem Header="Инструменты">
+            <MenuItem Header="Обновить" IsEnabled="False" ></MenuItem>
+            <MenuItem Header="Параметры">
                 <CheckBox Content="Расширенная панель" ></CheckBox>
+                
             </MenuItem>
             <MenuItem Header="Сортировка">
                 <RadioButton Name="NameRB" Content="По имени" Command="{Binding Sort}" CommandParameter="{Binding ElementName=NameRB, Path=Content}"/>
@@ -46,15 +47,20 @@
         </ListBox>
 
 
-        <StackPanel Width="200" Grid.Row="1" Grid.Column="2" >
+        <StackPanel Width="auto" MinWidth="200" Grid.Row="1" Grid.Column="2" >
             <StackPanel.Background>
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuBarColorKey}}"/>
             </StackPanel.Background>
-            <TextBlock>TestText</TextBlock>
-            <Button Margin="1" >Запустить</Button>
-            <Button Margin="1" >Папка</Button>
-            <Button Margin="1" >Debug</Button>
-            <Button Margin="1" >Release</Button>
+            <TextBlock HorizontalAlignment="Left" Text="Решение:"/>
+            <TextBlock Text="{Binding ElementName=LB, Path=SelectedItem.Name}"  HorizontalAlignment="Center" FontSize="20"></TextBlock>
+            <TextBlock Text="Последнее изменение:"/>
+            <TextBlock Text="{Binding ElementName=LB,Path=SelectedItem.AccessTime}"/>
+            <TextBlock Text="{Binding ElementName=LB, Path=SelectedItem.NameNestedProjects.Count, StringFormat=Проекты ({0}):}"/>
+            <ListBox Name="Proj" ItemsSource="{Binding ElementName=LB, Path=SelectedItem.NameNestedProjects}" MaxHeight="198"/>
+            <Button Margin="1" IsEnabled="False">Запустить</Button>
+            <Button Margin="1"  Command="{Binding OpenFolder}" CommandParameter="{Binding ElementName=Proj, Path=SelectedItem}">Папка</Button>
+            <Button Margin="1" IsEnabled="False" >Debug</Button>
+            <Button Margin="1" IsEnabled="False" >Release</Button>
         </StackPanel>
     </Grid>
 </Window>

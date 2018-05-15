@@ -18,7 +18,7 @@ namespace VSProjectManager.Model
             reposPath = Path;
         }
 
-        public ObservableCollection<Project> GetSolutions()
+        public ObservableCollection<Project> GetSolutions()  //добавить проекты из решения
         {
             var Projects = new ObservableCollection<Project>();
             DirectoryInfo di = new DirectoryInfo(reposPath);
@@ -28,7 +28,7 @@ namespace VSProjectManager.Model
                 {
                     if (file.Extension== ".sln")
                     {
-                        Projects.Add(new Project(dir.Name, dir.FullName, LastData(dir)));
+                        Projects.Add(new Project(dir.Name, dir.FullName, LastData(dir),new List<ProjectInSolution>(SolutionFile.Parse(file.FullName).ProjectsInOrder)));
                     }
                 }
             }
