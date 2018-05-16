@@ -53,7 +53,7 @@
                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuBarColorKey}}"/>
             </StackPanel.Background>
             <TextBlock HorizontalAlignment="Left" Text="Решение:"/>
-            <TextBlock Text="{Binding ElementName=LB, Path=SelectedItem.Name}"  HorizontalAlignment="Center" FontSize="20"></TextBlock>
+            <TextBlock Text="{Binding ElementName=LB, Path=SelectedItem.Name}"  HorizontalAlignment="Center" FontSize="20" Margin="1"></TextBlock>
             <TextBlock Text="Последнее изменение:"/>
             <TextBlock Text="{Binding ElementName=LB,Path=SelectedItem.AccessTime}"/>
             <TextBlock Text="{Binding ElementName=LB, Path=SelectedItem.Projects.Count, StringFormat=Проекты ({0}):}"/>
@@ -64,7 +64,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Margin="1" IsEnabled="False">Запустить</Button>
+            <Button Margin="1" Command="{Binding StartProject}">Запустить проект в VS</Button>
             <Button Margin="1" Command="{Binding OpenFolder}" >Папка</Button>
             <Button Margin="1" Command="{Binding OpenDebugFolder}">Debug</Button>
             <Button Margin="1" Command="{Binding OpenReleaseFolder}">Release</Button>

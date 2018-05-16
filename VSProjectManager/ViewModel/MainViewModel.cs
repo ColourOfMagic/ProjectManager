@@ -4,9 +4,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using VSProjectManager.Model;
 using System.Windows.Input;
-using System.Windows;
 using System.Diagnostics;
-using System;
 using System.IO;
 
 namespace VSProjectManager.ViewModel
@@ -137,7 +135,20 @@ namespace VSProjectManager.ViewModel
             }
         }
 
-        RelayCommand update;
+        RelayCommand startProject;
+        public ICommand StartProject
+        {
+            get
+            {
+                if (startProject == null)
+                {
+                    startProject = new RelayCommand(() => Process.Start(SelectProject.Path),() => SelectProject != null);
+                }
+                return startProject;
+            }
+        }
+
+                RelayCommand update;
         public ICommand Update
         {
             get
