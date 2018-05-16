@@ -1,41 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Build.Construction;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace VSProjectManager.Model
 {
     public class Project
     {
-        public string Name { get; set; }
         public string Path { get; set; }
-        public DateTime AccessTime { get; set; }
-        public List<ProjectInSolution> NestedProjects { get; set; }  //Изменить потом названия, это проекты, а сам класс это решения
-        public List<string> NameNestedProjects
+        public string Name { get; set; }
+        public string DirectoryPath
         {
             get
             {
-                var Coll = new List<string>();
-                foreach (var item in NestedProjects)
+                for (int i = Path.Length - 7; i > 0; i--)
                 {
-                    if (item.ProjectType != SolutionProjectType.SolutionFolder)  //Чтобы в список не попали просто папки, потом исправить
-                        Coll.Add(item.ProjectName);
+                    if (Path[i] == '\\')
+                    {
+                        return Path.Substring(0, i);
+                        
+                    }
                 }
-                return Coll;
+                return null;
+            }
+        }
+        public string DebugPath
+        {
+            get
+            {
+                return DirectoryPath + @"\bin\Debug";
+            }
+        }
+        public string ReleasePath
+        {
+            get
+            {
+                return DirectoryPath + @"\bin\Release";
             }
         }
 
-        public double TimeAgo
+        public Project(string path,string name)
         {
-            get; set;
-        }
-
-        public Project(string name, string path, DateTime accessTime, List<ProjectInSolution> projects)
-        {
-            Name = name;
             Path = path;
-            AccessTime = accessTime;
-            TimeAgo = (DateTime.Now - AccessTime).TotalDays;
-            NestedProjects = projects;
+            Name = name;
         }
     }
 }

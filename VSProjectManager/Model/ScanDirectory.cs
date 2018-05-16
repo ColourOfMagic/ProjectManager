@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Build.Construction;
 
 namespace VSProjectManager.Model
 {
@@ -18,17 +14,35 @@ namespace VSProjectManager.Model
             reposPath = Path;
         }
 
-        public ObservableCollection<Project> GetSolutions()  //добавить проекты из решения
+        public ObservableCollection<Solution> GetSolutions()  //добавить проекты из решения
         {
-            var Projects = new ObservableCollection<Project>();
+            var Projects = new ObservableCollection<Solution>();
             DirectoryInfo di = new DirectoryInfo(reposPath);
             foreach (var dir in di.GetDirectories())
             {
                 foreach (var file in dir.GetFiles())
                 {
-                    if (file.Extension== ".sln")
+                    if (file.Extension== ".sln")  //Можно подключить Microsoft.Buid, но так получилось эффективнее
                     {
-                        Projects.Add(new Project(dir.Name, dir.FullName, LastData(dir),new List<ProjectInSolution>(SolutionFile.Parse(file.FullName).ProjectsInOrder)));
+                        Projects.Add(new Solution(dir.Name, dir.FullName, LastData(dir),GetProjects(dir)));
+                        break;
+                    }
+                }
+            }
+            return Projects;
+        }
+
+        public List<Project> GetProjects(DirectoryInfo directory)
+        {
+            var Projects = new List<Project>();
+            foreach (var dir in directory.GetDirectories())
+            {
+                foreach (var item in dir.GetFiles())
+                {
+                    if (item.Extension == ".csproj")
+                    {
+                        Projects.Add(new Project(item.FullName, item.Name.Substring(0, item.Name.Length - 7)));
+
                     }
                 }
             }
