@@ -6,6 +6,8 @@ using VSProjectManager.Model;
 using System.Windows.Input;
 using System.Diagnostics;
 using System.IO;
+using System;
+using VSProjectManager.View;
 
 namespace VSProjectManager.ViewModel
 {
@@ -148,7 +150,7 @@ namespace VSProjectManager.ViewModel
             }
         }
 
-                RelayCommand update;
+        RelayCommand update;
         public ICommand Update
         {
             get
@@ -164,6 +166,24 @@ namespace VSProjectManager.ViewModel
         private void UpdateCollection()
         {
             Solutions = scanner.GetSolutions();
+        }
+
+        RelayCommand openSettings;
+        public ICommand OpenSettings
+        {
+            get
+            {
+                if (openSettings == null)
+                {
+                    openSettings = new RelayCommand(OpenSettingsWindow);
+                }
+                return openSettings;
+            }
+        }
+
+        private void OpenSettingsWindow()  //Догадываюсь другое окно в MVVM открывается не тут
+        {
+            new SettingsWindow().Show();
         }
 
         #endregion

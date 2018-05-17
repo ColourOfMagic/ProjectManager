@@ -26,7 +26,7 @@
             <MenuItem Header="Обновить" Command="{Binding Update}" ></MenuItem>
             <MenuItem Header="Параметры">
                 <CheckBox Content="Расширенная панель" IsEnabled="False"></CheckBox>
-                <MenuItem Header="Настройки" IsEnabled="False"/>
+                <MenuItem Header="Настройки" Command="{Binding OpenSettings}"/>
 
             </MenuItem>
             <MenuItem Header="Сортировка">
