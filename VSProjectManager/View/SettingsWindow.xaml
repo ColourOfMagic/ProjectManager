@@ -16,7 +16,7 @@
 
     <DockPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="5" >
-            <Button Content="Применить" Margin="3" Width="70"/>
+            <Button Content="Применить" Margin="3" Width="70" IsEnabled="{Binding IsChanged}"/>
             <Button Content="Отмена" Margin="3" Width="50" Height="20" Click="CloseWindow"/>
         </StackPanel>
         <StackPanel>
@@ -26,8 +26,8 @@
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                 </GroupBox.BorderBrush>
                 <DockPanel  Margin="5">
-                    <Button DockPanel.Dock="Right" Margin="5,0,0,0">Выбрать</Button>
-                    <TextBox MinWidth="300"/>
+                    <Button DockPanel.Dock="Right" Margin="5,0,0,0" Command="{Binding SelectPath}">Выбрать</Button>
+                    <TextBox MinWidth="300" Text="{Binding DirectoryPath}"/>
                 </DockPanel>
             </GroupBox>
             <StackPanel Orientation="Horizontal" Margin="5">

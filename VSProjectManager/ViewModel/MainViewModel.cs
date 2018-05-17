@@ -6,7 +6,6 @@ using VSProjectManager.Model;
 using System.Windows.Input;
 using System.Diagnostics;
 using System.IO;
-using System;
 using VSProjectManager.View;
 
 namespace VSProjectManager.ViewModel
@@ -181,9 +180,10 @@ namespace VSProjectManager.ViewModel
             }
         }
 
-        private void OpenSettingsWindow()  //Догадываюсь другое окно в MVVM открывается не тут
+        private void OpenSettingsWindow()  //Догадываюсь другое окно в MVVM открывается не так
         {
             new SettingsWindow().Show();
+            MessengerInstance.Send<SettingMG>(new SettingMG(path));
         }
 
         #endregion
