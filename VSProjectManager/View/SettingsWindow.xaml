@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VSProjectManager.View"
         xmlns:vm="clr-namespace:VSProjectManager.ViewModel" 
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="348" Width="411">
+        Title="SettingsWindow" Height="348" Width="411" >
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
     </Window.Background>
@@ -16,7 +16,7 @@
 
     <DockPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="5" >
-            <Button Content="Применить" Margin="3" Width="70" IsEnabled="{Binding IsChanged}"/>
+            <Button Content="Применить" Margin="3" Width="70" Command="{Binding SendSetting}"/>
             <Button Content="Отмена" Margin="3" Width="50" Height="20" Click="CloseWindow"/>
         </StackPanel>
         <StackPanel>
@@ -27,19 +27,19 @@
                 </GroupBox.BorderBrush>
                 <DockPanel  Margin="5">
                     <Button DockPanel.Dock="Right" Margin="5,0,0,0" Command="{Binding SelectPath}">Выбрать</Button>
-                    <TextBox MinWidth="300" Text="{Binding DirectoryPath}"/>
+                    <TextBox MinWidth="300" Text="{Binding Settings.DirectoryPath}"/>
                 </DockPanel>
             </GroupBox>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <TextBlock Text="Сканирование: " VerticalAlignment="Center"/>
-                <ComboBox SelectedIndex="0" Margin="5,0,0,0" VerticalAlignment="Center" >
+                <ComboBox SelectedIndex="{Binding Settings.Scan}" Margin="5,0,0,0" VerticalAlignment="Center"  >
                     <ComboBoxItem>Полное</ComboBoxItem>
                     <ComboBoxItem>Быстрое</ComboBoxItem>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <TextBlock Text="Сортировка по умолчанию: " VerticalAlignment="Center"/>
-                <ComboBox SelectedIndex="0" Margin="5,0,0,0" VerticalAlignment="Center" >
+                <ComboBox SelectedIndex="{Binding Settings.Sort}" Margin="5,0,0,0" VerticalAlignment="Center" >
                     <ComboBoxItem>По дате</ComboBoxItem>
                     <ComboBoxItem>По имени</ComboBoxItem>
                 </ComboBox>
@@ -47,7 +47,7 @@
 
             <StackPanel Orientation="Horizontal" Margin="5">
                 <TextBlock Text="Отображение: " VerticalAlignment="Center"/>
-                <ComboBox SelectedIndex="0" Margin="5,0,0,0" VerticalAlignment="Center" >
+                <ComboBox SelectedIndex="{Binding Settings.TopMost}" Margin="5,0,0,0" VerticalAlignment="Center" >
                     <ComboBoxItem>Oбычное</ComboBoxItem>
                     <ComboBoxItem>Поверх всех окон</ComboBoxItem>
                 </ComboBox>

@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using System;
 using System.Windows.Forms;
 using System.Windows.Input;
 using VSProjectManager.Model;
@@ -8,45 +9,29 @@ namespace VSProjectManager.ViewModel
 {
     class SettingsViewModel : ViewModelBase
     {
-        string directoryPath;
-        public string DirectoryPath
+
+        SettingMG settings;
+        public SettingMG Settings
         {
             get
             {
-                return directoryPath;
+                return settings;
             }
 
             set
             {
-                Set(ref directoryPath, value);
-                IsChanged = true;
-            }
-        }
-
-        bool isChanged;
-        public bool IsChanged
-        {
-            get
-            {
-                return isChanged;
-            }
-
-            set
-            {
-                Set(ref isChanged, value);
+                Set(ref settings, value);
             }
         }
 
         public SettingsViewModel()
         {
             MessengerInstance.Register<SettingMG>(this, ProcessingMG);
-            
         }
 
         private void ProcessingMG(SettingMG obj)
         {
-            DirectoryPath = obj.DirectoryPath;
-            IsChanged = false;
+            Settings = obj;
         }
 
         RelayCommand selectPath;
@@ -67,8 +52,27 @@ namespace VSProjectManager.ViewModel
             FolderBrowserDialog fd = new FolderBrowserDialog();
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                DirectoryPath = fd.SelectedPath;
+                Settings.DirectoryPath = fd.SelectedPath;
             }
+        }
+
+        RelayCommand sendSetting;
+        public ICommand SendSetting
+        {
+            get
+            {
+                if (sendSetting == null)
+                {
+                    sendSetting = new RelayCommand(SendMessage,()=>(Settings!=null && Settings.IsChanged));
+                }
+                return sendSetting;
+            }
+        }
+        
+
+        private void SendMessage()
+        {
+            MessengerInstance.Send<SettingMG>(Settings);
         }
     }
 }

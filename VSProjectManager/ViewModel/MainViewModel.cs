@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Diagnostics;
 using System.IO;
 using VSProjectManager.View;
+using System;
 
 namespace VSProjectManager.ViewModel
 {
@@ -18,6 +19,26 @@ namespace VSProjectManager.ViewModel
         Solution currentProject;
         Project selectProject;
         int focusId;
+        SettingMG settings;
+        bool topMost;
+
+        public bool TopMost
+        {
+            get { return topMost; }
+            set
+            {
+                Set(ref topMost, value);
+            }
+        }
+
+        public SettingMG Settings
+        {
+            get { return settings; }
+            set
+            {
+                Set(ref settings, value);
+            }
+        }
 
         public ObservableCollection<Solution> Solutions
         {
@@ -41,15 +62,6 @@ namespace VSProjectManager.ViewModel
             }
         }
 
-        public int FocusId   //не лучшее решение, потом переделать
-        {
-            get { return focusId; }
-            set
-            {
-                Set(ref focusId, value);
-            }
-        }
-
         public Project SelectProject
         {
             get { return selectProject; }
@@ -61,10 +73,19 @@ namespace VSProjectManager.ViewModel
 
         public MainViewModel()
         {
+            MessengerInstance.Register<SettingMG>(this, ProcessingMG);
             path = "C:\\Users\\PC\\source\\repos";
             scanner = new ScanDirectory(path);
             Solutions = scanner.GetSolutions();
             SortProjects("По дате");
+        }
+
+        private void ProcessingMG(SettingMG obj)
+        {
+            if (!obj.IsChanged) return;
+            System.Windows.Forms.MessageBox.Show(String.Format( "{0}\n {1}\n {2}\n {3}\n",obj.DirectoryPath,obj.Scan,obj.Sort,obj.TopMost) );
+            Settings = obj;
+            TopMost = obj.TopMost==1;
         }
 
         #region Command
@@ -183,7 +204,7 @@ namespace VSProjectManager.ViewModel
         private void OpenSettingsWindow()  //Догадываюсь другое окно в MVVM открывается не так
         {
             new SettingsWindow().Show();
-            MessengerInstance.Send<SettingMG>(new SettingMG(path));
+            MessengerInstance.Send<SettingMG>(new SettingMG(path,0,0,0));
         }
 
         #endregion

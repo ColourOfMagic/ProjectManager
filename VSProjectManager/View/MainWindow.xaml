@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:VSProjectManager"
         xmlns:vm="clr-namespace:VSProjectManager.ViewModel" 
         mc:Ignorable="d"
-        Title="VSProjectManager" Height="451" Width="575.662">
+        Title="VSProjectManager" Height="451" Width="575.662" Topmost="{Binding TopMost}">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuBarColorKey}}"/>
+    </Window.Background>
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
@@ -36,7 +39,7 @@
         </Menu>
         <GridSplitter Grid.Column="1" Grid.Row="1" ShowsPreview="False" Width="3"
         HorizontalAlignment="Center" VerticalAlignment="Stretch" />
-        <ListBox Name="LB" ItemsSource="{Binding Solutions}" SelectedIndex="{Binding FocusId}" Grid.Row="1">
+        <ListBox Name="LB" ItemsSource="{Binding Solutions}" SelectedIndex="0"   Grid.Row="1">
             <ListBox.ItemTemplate >
                 <DataTemplate>
                     <DockPanel>
@@ -48,10 +51,7 @@
         </ListBox>
 
 
-        <StackPanel Width="auto" MinWidth="200" Grid.Row="1" Grid.Column="2" >
-            <StackPanel.Background>
-                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuBarColorKey}}"/>
-            </StackPanel.Background>
+        <StackPanel Width="auto" MinWidth="200" Grid.Row="1" Grid.Column="2" Margin="0,0,2,0" >
             <TextBlock HorizontalAlignment="Left" Text="Решение:"/>
             <TextBlock Text="{Binding ElementName=LB, Path=SelectedItem.Name}"  HorizontalAlignment="Center" FontSize="20" Margin="1"></TextBlock>
             <TextBlock Text="Последнее изменение:"/>
