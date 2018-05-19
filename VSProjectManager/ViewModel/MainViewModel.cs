@@ -18,7 +18,6 @@ namespace VSProjectManager.ViewModel
         ObservableCollection<Solution> solutions;
         Solution currentProject;
         Project selectProject;
-        int focusId;
         SettingMG settings;
         bool topMost;
 
@@ -74,6 +73,7 @@ namespace VSProjectManager.ViewModel
         public MainViewModel()
         {
             MessengerInstance.Register<SettingMG>(this, ProcessingMG);
+            Settings = new SettingMG("C:\\Users\\PC\\source\\repos", 0, 0, 0);
             path = "C:\\Users\\PC\\source\\repos";
             scanner = new ScanDirectory(path);
             Solutions = scanner.GetSolutions();
@@ -203,8 +203,10 @@ namespace VSProjectManager.ViewModel
 
         private void OpenSettingsWindow()  //Догадываюсь другое окно в MVVM открывается не так
         {
-            new SettingsWindow().Show();
-            MessengerInstance.Send<SettingMG>(new SettingMG(path,0,0,0));
+            SettingsWindow wind = new SettingsWindow();
+            Settings.IsChanged = false;
+            MessengerInstance.Send<SettingMG>(Settings);
+            wind.ShowDialog();
         }
 
         #endregion

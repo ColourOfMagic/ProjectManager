@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VSProjectManager.View"
         xmlns:vm="clr-namespace:VSProjectManager.ViewModel" 
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="348" Width="411" >
+        Title="SettingsWindow" Height="348" Width="411" ShowInTaskbar="False" >
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
     </Window.Background>
