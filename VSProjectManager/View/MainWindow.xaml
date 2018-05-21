@@ -10,6 +10,22 @@
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuBarColorKey}}"/>
     </Window.Background>
+    <Window.Resources>
+        <Style x:Key="md" TargetType="StackPanel" >
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=Mode, Path=IsChecked}" Value="True">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="mdd" TargetType="StackPanel" >
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=Mode, Path=IsChecked}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Window.DataContext>
         <vm:MainViewModel/>
     </Window.DataContext>
@@ -18,17 +34,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" >
             <MenuItem Header="Обновить" Command="{Binding Update}" ></MenuItem>
             <MenuItem Header="Параметры">
-                <CheckBox Content="Расширенная панель" IsEnabled="False"></CheckBox>
+                <CheckBox Name="Mode" Content="Расширенная панель" ></CheckBox>
                 <MenuItem Header="Настройки" Command="{Binding OpenSettings}"/>
 
             </MenuItem>
@@ -37,8 +53,6 @@
                 <RadioButton Name="DateRB" Content="По дате" Command="{Binding Sort}" CommandParameter="{Binding ElementName=DateRB, Path=Content}"/>
             </MenuItem>
         </Menu>
-        <GridSplitter Grid.Column="1" Grid.Row="1" ShowsPreview="False" Width="3"
-        HorizontalAlignment="Center" VerticalAlignment="Stretch" />
         <ListBox Name="LB" ItemsSource="{Binding Solutions}" SelectedIndex="0"   Grid.Row="1">
             <ListBox.ItemTemplate >
                 <DataTemplate>
@@ -51,13 +65,13 @@
         </ListBox>
 
 
-        <StackPanel Width="auto" MinWidth="200" Grid.Row="1" Grid.Column="2" Margin="0,0,2,0" >
+        <StackPanel Width="auto" MinWidth="200" Grid.Row="1" Grid.Column="2" Margin="0,0,2,0" Style="{StaticResource md}" >
             <TextBlock HorizontalAlignment="Left" Text="Решение:"/>
             <TextBlock Text="{Binding ElementName=LB, Path=SelectedItem.Name}"  HorizontalAlignment="Center" FontSize="20" Margin="1"></TextBlock>
             <TextBlock Text="Последнее изменение:"/>
             <TextBlock Text="{Binding ElementName=LB,Path=SelectedItem.AccessTime}"/>
             <TextBlock Text="{Binding ElementName=LB, Path=SelectedItem.Projects.Count, StringFormat=Проекты ({0}):}"/>
-            <ListBox Name="Proj" ItemsSource="{Binding ElementName=LB, Path=SelectedItem.Projects}" SelectedItem="{Binding SelectProject, Mode=TwoWay}" MaxHeight="198" Margin="1">
+            <ListBox  ItemsSource="{Binding ElementName=LB, Path=SelectedItem.Projects}" SelectedItem="{Binding SelectProject, Mode=TwoWay}" MaxHeight="198" Margin="1">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock  Text="{Binding Name}"/>
@@ -68,7 +82,19 @@
             <Button Margin="1" Command="{Binding OpenFolder}" >Папка</Button>
             <Button Margin="1" Command="{Binding OpenDebugFolder}">Debug</Button>
             <Button Margin="1" Command="{Binding OpenReleaseFolder}">Release</Button>
-            <TextBlock Text="{Binding ProjectIndex}"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="2" Style="{StaticResource mdd}">
+            <ListBox ItemsSource="{Binding ElementName=LB, Path=SelectedItem.Projects}" SelectedItem="{Binding SelectProject, Mode=TwoWay}" MaxHeight="198" Margin="1">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock  Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button Margin="1" Command="{Binding StartProject}">Запустить проект в VS</Button>
+            <Button Margin="1" Command="{Binding OpenFolder}" >Папка</Button>
+            <Button Margin="1" Command="{Binding OpenDebugFolder}">Debug</Button>
+            <Button Margin="1" Command="{Binding OpenReleaseFolder}">Release</Button>
         </StackPanel>
     </Grid>
 </Window>

@@ -29,7 +29,6 @@ namespace VSProjectManager.ViewModel
                 Set(ref topMost, value);
             }
         }
-
         public SettingMG Settings
         {
             get { return settings; }
@@ -38,7 +37,6 @@ namespace VSProjectManager.ViewModel
                 Set(ref settings, value);
             }
         }
-
         public ObservableCollection<Solution> Solutions
         {
             get
@@ -51,7 +49,6 @@ namespace VSProjectManager.ViewModel
             }
 
         }
-
         public Solution CurrentProject
         {
             get { return currentProject; }
@@ -60,7 +57,6 @@ namespace VSProjectManager.ViewModel
                 Set(ref currentProject, value);
             }
         }
-
         public Project SelectProject
         {
             get { return selectProject; }
@@ -74,8 +70,7 @@ namespace VSProjectManager.ViewModel
         {
             MessengerInstance.Register<SettingMG>(this, ProcessingMG);
             Settings = new SettingMG("C:\\Users\\PC\\source\\repos", 0, 0, 0);
-            path = "C:\\Users\\PC\\source\\repos";
-            scanner = new ScanDirectory(path);
+            scanner = new ScanDirectory(Settings.DirectoryPath);
             Solutions = scanner.GetSolutions();
             SortProjects("По дате");
         }
