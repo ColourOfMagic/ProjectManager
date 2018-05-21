@@ -78,7 +78,6 @@ namespace VSProjectManager.ViewModel
         private void ProcessingMG(SettingMG obj)
         {
             if (!obj.IsChanged) return;
-            System.Windows.Forms.MessageBox.Show(String.Format( "{0}\n {1}\n {2}\n {3}\n",obj.DirectoryPath,obj.Scan,obj.Sort,obj.TopMost) );
             Settings = obj;
             TopMost = obj.TopMost==1;
         }
@@ -98,7 +97,7 @@ namespace VSProjectManager.ViewModel
             }
         }
 
-        private void SortProjects(string obj)
+        private void SortProjects(string obj)  //Явно нужно что то сделать с сортировкой
         {
             if (obj == "По имени")
             {
@@ -172,7 +171,7 @@ namespace VSProjectManager.ViewModel
             {
                 if (update == null)
                 {
-                    update = new RelayCommand(UpdateCollection);  //Добавить отключение кнопок если не выбран проект
+                    update = new RelayCommand(UpdateCollection);  
                 }
                 return update;
             }
@@ -180,7 +179,10 @@ namespace VSProjectManager.ViewModel
 
         private void UpdateCollection()
         {
+            scanner.reposPath = Settings.DirectoryPath;
             Solutions = scanner.GetSolutions();
+            if (Settings.Sort == 0) SortProjects("По дате");
+            else SortProjects("По имени");
         }
 
         RelayCommand openSettings;

@@ -73,6 +73,7 @@ namespace VSProjectManager.ViewModel
         private void SendMessage()
         {
             MessengerInstance.Send<SettingMG>(Settings);
+            Settings.IsChanged = false;
         }
     }
 }

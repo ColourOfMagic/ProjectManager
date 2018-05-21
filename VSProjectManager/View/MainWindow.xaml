@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:VSProjectManager"
         xmlns:vm="clr-namespace:VSProjectManager.ViewModel" 
         mc:Ignorable="d"
-        Title="VSProjectManager" Height="451" Width="575.662" Topmost="{Binding TopMost}">
+        Title="VSProjectManager" Height="451" Width="575.662" Topmost="{Binding TopMost}" Icon="/VSProjectManager;component/Icon/mainIcon.ico">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.MenuBarColorKey}}"/>
     </Window.Background>
@@ -42,10 +42,14 @@
         </Grid.ColumnDefinitions>
 
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" >
-            <MenuItem Header="Обновить" Command="{Binding Update}" ></MenuItem>
+            <MenuItem Header="Обновить" Command="{Binding Update}"/>
             <MenuItem Header="Параметры">
-                <CheckBox Name="Mode" Content="Расширенная панель" ></CheckBox>
-                <MenuItem Header="Настройки" Command="{Binding OpenSettings}"/>
+                <CheckBox Name="Mode" Content="Расширенная панель" />
+                <MenuItem Header="Настройки" Command="{Binding OpenSettings}">
+                    <MenuItem.Icon>
+                        <Image Source="/VSProjectManager;component/Icon/SettingsIcon.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
 
             </MenuItem>
             <MenuItem Header="Сортировка">
