@@ -8,13 +8,13 @@ using System.Diagnostics;
 using System.IO;
 using VSProjectManager.View;
 using System;
+using System.Windows;
 
 namespace VSProjectManager.ViewModel
 {
     class MainViewModel : ViewModelBase
     {
         ScanDirectory scanner;
-        string path;   //Продумать движуху с настройками и всяким таким
         ObservableCollection<Solution> solutions;
         Solution currentProject;
         Project selectProject;
@@ -69,17 +69,22 @@ namespace VSProjectManager.ViewModel
         public MainViewModel()
         {
             MessengerInstance.Register<SettingMG>(this, ProcessingMG);
-            Settings = new SettingMG("C:\\Users\\PC\\source\\repos", 0, 0, 0);
+            Settings = SettingsManager.GetSettings();
+            if (!SettingsManager.IsExist())
+            {
+                Settings = new SettingMG("C:\\Users\\PC\\source\\repos", 0, 0, 0);
+            }
             scanner = new ScanDirectory(Settings.DirectoryPath);
             Solutions = scanner.GetSolutions();
-            SortProjects("По дате");
+
+            UpdateCollection();
         }
 
         private void ProcessingMG(SettingMG obj)
         {
             if (!obj.IsChanged) return;
             Settings = obj;
-            TopMost = obj.TopMost==1;
+            TopMost = obj.TopMost == 1;
         }
 
         #region Command
@@ -158,7 +163,7 @@ namespace VSProjectManager.ViewModel
             {
                 if (startProject == null)
                 {
-                    startProject = new RelayCommand(() => Process.Start(SelectProject.Path),() => SelectProject != null);
+                    startProject = new RelayCommand(() => Process.Start(SelectProject.Path), () => SelectProject != null);
                 }
                 return startProject;
             }
@@ -171,7 +176,7 @@ namespace VSProjectManager.ViewModel
             {
                 if (update == null)
                 {
-                    update = new RelayCommand(UpdateCollection);  
+                    update = new RelayCommand(UpdateCollection);
                 }
                 return update;
             }
@@ -179,7 +184,12 @@ namespace VSProjectManager.ViewModel
 
         private void UpdateCollection()
         {
-            scanner.reposPath = Settings.DirectoryPath;
+            if (Directory.Exists(Settings.DirectoryPath))
+                scanner.reposPath = Settings.DirectoryPath;
+            else
+            {
+                MessageBox.Show("Такой папки не существует, измените папку в настройках");
+            }
             Solutions = scanner.GetSolutions();
             if (Settings.Sort == 0) SortProjects("По дате");
             else SortProjects("По имени");

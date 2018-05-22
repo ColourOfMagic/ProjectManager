@@ -69,11 +69,23 @@ namespace VSProjectManager.ViewModel
             }
         }
         
-
         private void SendMessage()
         {
             MessengerInstance.Send<SettingMG>(Settings);
             Settings.IsChanged = false;
+        }
+
+        RelayCommand saveSettings;
+        public ICommand SaveSettings
+        {
+            get
+            {
+                if (saveSettings == null)
+                {
+                    saveSettings = new RelayCommand(()=>SettingsManager.SetSettings(Settings));
+                }
+                return saveSettings;
+            }
         }
     }
 }

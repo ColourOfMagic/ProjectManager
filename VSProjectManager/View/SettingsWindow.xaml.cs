@@ -28,5 +28,10 @@ namespace VSProjectManager.View
         {
             this.Close();
         }
+
+        private void SetClose(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

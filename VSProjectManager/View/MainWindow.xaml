@@ -57,7 +57,7 @@
                 <RadioButton Name="DateRB" Content="По дате" Command="{Binding Sort}" CommandParameter="{Binding ElementName=DateRB, Path=Content}"/>
             </MenuItem>
         </Menu>
-        <ListBox Name="LB" ItemsSource="{Binding Solutions}" SelectedIndex="0"   Grid.Row="1">
+        <ListBox Name="LB" ItemsSource="{Binding Solutions}" SelectedIndex="0" Margin="1"  Grid.Row="1">
             <ListBox.ItemTemplate >
                 <DataTemplate>
                     <DockPanel>
