@@ -39,10 +39,9 @@ namespace VSProjectManager.Model
             {
                 foreach (var item in dir.GetFiles())
                 {
-                    if (item.Extension == ".csproj")
+                    if (item.Extension.EndsWith("proj"))
                     {
-                        Projects.Add(new Project(item.FullName, item.Name.Substring(0, item.Name.Length - 7)));
-
+                        Projects.Add(new Project(item.FullName, item.Name.Substring(0, item.Name.LastIndexOf('.'))));
                     }
                 }
             }

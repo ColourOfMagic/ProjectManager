@@ -8,7 +8,7 @@ namespace VSProjectManager.Model
         public string Name { get; set; }
         public string Path { get; set; }
         public DateTime AccessTime { get; set; }
-        public List<Project> Projects { get; set; }  //Изменить потом названия, это проекты, а сам класс это решения
+        public List<Project> Projects { get; set; }
 
         public double TimeAgo
         {

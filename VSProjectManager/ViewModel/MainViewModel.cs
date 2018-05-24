@@ -76,7 +76,6 @@ namespace VSProjectManager.ViewModel
             }
             scanner = new ScanDirectory(Settings.DirectoryPath);
             Solutions = scanner.GetSolutions();
-
             UpdateCollection();
         }
 
