@@ -24,5 +24,15 @@ namespace VSProjectManager
         {
             InitializeComponent();
         }
+
+        public void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

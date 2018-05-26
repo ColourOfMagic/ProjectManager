@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:VSProjectManager.Styles">
+
+    <SolidColorBrush x:Key="BaseColorBrush" Color="#FFF6F8FA"></SolidColorBrush>
+    <Color x:Key="Basecolor">#FFF6F8FA</Color>
+
+    <SolidColorBrush x:Key="DarkColorBrush" Color="#FF24292E"/>
+    <Color x:Key="DarkColor">#FF24292E</Color>
+
+    <SolidColorBrush x:Key="GrayColorBrush" Color="#FF999C9E"/>
+    <Color x:Key="GrayColor">#FF999C9E</Color>
+
+
+    <SolidColorBrush x:Key="GreenColorBrush" Color="#FFCDFFD8"/>
+    <Color x:Key="GreenColor">#FFCDFFD8</Color>
+
+
+    <SolidColorBrush x:Key="LightGreenColorBrush" Color="#FFE6FFED" />
+    <Color x:Key="LightGreenColor">#FFE6FFED</Color>
+
+    <SolidColorBrush x:Key="GrayButtonBrush" Color="#FFE8E8E8" />
+    <SolidColorBrush x:Key="GrayTextButtonBrush" Color="#FF838383"/>
+    
+</ResourceDictionary>
