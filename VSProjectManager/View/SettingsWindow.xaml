@@ -6,10 +6,12 @@
         xmlns:local="clr-namespace:VSProjectManager.View"
         xmlns:vm="clr-namespace:VSProjectManager.ViewModel" 
         mc:Ignorable="d"
-        Title="Настройки" Height="348" Width="411" ShowInTaskbar="False" Topmost="True">
-    <Window.Background>
-        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
-    </Window.Background>
+        Title="Настройки" 
+        Height="348" 
+        Width="411" 
+        ShowInTaskbar="False" 
+        Topmost="True"
+        Background="{StaticResource BaseColorBrush}">
     <Window.DataContext>
         <vm:SettingsViewModel/>
     </Window.DataContext>
@@ -17,11 +19,11 @@
     <DockPanel>
         <DockPanel DockPanel.Dock="Bottom" Margin="5" >
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                <Button Content="Применить" Margin="3" Width="70" Command="{Binding SendSetting}" Click="SetClose" />
-                <Button Content="Отмена" Margin="3" Width="50" Height="20" Click="CloseWindow"/>
+                <Button Content="Применить" Margin="3" Width="70" Command="{Binding SendSetting}" Click="SetClose" Style="{StaticResource CButton}" />
+                <Button Content="Отмена" Margin="3" Width="50" Height="20" Click="CloseWindow" Style="{StaticResource CButton}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Content="Сохранить настройки" Command="{Binding SaveSettings}" Margin="3" />
+                <Button Content="Сохранить настройки" Command="{Binding SaveSettings}" Style="{StaticResource CButton}" Margin="3" />
             </StackPanel>
 
         </DockPanel>
@@ -32,13 +34,15 @@
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                 </GroupBox.BorderBrush>
                 <DockPanel  Margin="5">
-                    <Button DockPanel.Dock="Right" Margin="5,0,0,0" Command="{Binding SelectPath}">Выбрать</Button>
-                    <TextBox MinWidth="300" Text="{Binding Settings.DirectoryPath,  UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button DockPanel.Dock="Right" Margin="5,0,0,0" Command="{Binding SelectPath}" Style="{StaticResource CButton}">Выбрать</Button>
+                    <TextBox MinWidth="300" Text="{Binding Settings.DirectoryPath,  UpdateSourceTrigger=PropertyChanged}" Background="{StaticResource BaseColorBrush}">
+                        
+                    </TextBox>
                 </DockPanel>
             </GroupBox>
             <StackPanel Orientation="Horizontal" Margin="5">
                 <TextBlock Text="Сканирование: " VerticalAlignment="Center"/>
-                <ComboBox SelectedIndex="{Binding Settings.Scan}" Margin="5,0,0,0" VerticalAlignment="Center"  >
+                <ComboBox SelectedIndex="{Binding Settings.Scan}" Margin="5,0,0,0" VerticalAlignment="Center" >
                     <ComboBoxItem>Полное</ComboBoxItem>
                     <ComboBoxItem>Быстрое</ComboBoxItem>
                 </ComboBox>

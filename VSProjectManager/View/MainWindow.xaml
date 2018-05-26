@@ -57,6 +57,7 @@
         </Grid.ColumnDefinitions>
 
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="{StaticResource DarkColorBrush}">
+            <Image DockPanel.Dock="Left" Source="/VSProjectManager;component/Icon/mainIcon.ico" Height="24"/>
             <Menu Background="{StaticResource DarkColorBrush}" Foreground="{StaticResource BaseColorBrush}" Height="22" VerticalAlignment="Center" Margin="0,3,0,0" >
             <MenuItem Header="Обновить" Command="{Binding Update}"/>
             <MenuItem Header="Параметры">
@@ -129,7 +130,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Margin="1" Command="{Binding StartProject}" Style="{StaticResource CButton}">Запустить проект в VS</Button>
+            <Button Margin="1" Command="{Binding StartProject}" Style="{StaticResource CButton}" >Запустить проект в VS</Button>
             <Button Margin="1" Command="{Binding OpenFolder}" Style="{StaticResource CButton}">Папка</Button>
             <Button Margin="1" Command="{Binding OpenDebugFolder}" Style="{StaticResource CButton}">Debug</Button>
             <Button Margin="1" Command="{Binding OpenReleaseFolder}" Style="{StaticResource CButton}">Release</Button>
