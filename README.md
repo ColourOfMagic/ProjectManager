@@ -5,8 +5,8 @@
 - Динамическая проверка наличия нужных папок
 - Уменьшенный режим и отображение над всеми окнами
 ## Скрины
-![Alt text](https://raw.githubusercontent.com/ColourOfMagic/Additions/master/Images/portImage.PNG)
-![Alt text](https://github.com/ColourOfMagic/Additions/blob/master/Images/screen.PNG?raw=true)
-![Alt text](https://github.com/ColourOfMagic/Additions/blob/master/Images/SettingImage.PNG?raw=true)
+![Alt text](https://github.com/ColourOfMagic/Additions/blob/master/Images/VSProjectManager/mainImage.PNG?raw=true)
+![Alt text](https://github.com/ColourOfMagic/Additions/blob/master/Images/VSProjectManager/SettingImage.PNG?raw=true)
+![Alt text](https://github.com/ColourOfMagic/Additions/blob/master/Images/VSProjectManager/portImage.PNG?raw=true)
 ### Подключаемые библиотеки
 - **MVVM Light Toolkit**
