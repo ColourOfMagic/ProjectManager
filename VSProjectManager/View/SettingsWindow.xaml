@@ -19,11 +19,11 @@
     <DockPanel>
         <DockPanel DockPanel.Dock="Bottom" Margin="5" >
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
-                <Button Content="Применить" Margin="3" Width="70" Command="{Binding SendSetting}" Click="SetClose" Style="{StaticResource CButton}" />
-                <Button Content="Отмена" Margin="3" Width="50" Height="20" Click="CloseWindow" Style="{StaticResource CButton}"/>
+                <Button Content="Применить" Margin="3" Width="70" Command="{Binding SendSetting}" Click="SetClose" />
+                <Button Content="Отмена" Margin="3" Width="50" Height="20" Click="CloseWindow" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button Content="Сохранить настройки" Command="{Binding SaveSettings}" Style="{StaticResource CButton}" Margin="3" />
+                <Button Content="Сохранить настройки" Command="{Binding SaveSettings}" Margin="3" />
             </StackPanel>
 
         </DockPanel>
@@ -34,7 +34,7 @@
                     <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
                 </GroupBox.BorderBrush>
                 <DockPanel  Margin="5">
-                    <Button DockPanel.Dock="Right" Margin="5,0,0,0" Command="{Binding SelectPath}" Style="{StaticResource CButton}">Выбрать</Button>
+                    <Button DockPanel.Dock="Right" Margin="5,0,0,0" Command="{Binding SelectPath}" >Выбрать</Button>
                     <TextBox MinWidth="300" Text="{Binding Settings.DirectoryPath,  UpdateSourceTrigger=PropertyChanged}" Background="{StaticResource BaseColorBrush}">
                         
                     </TextBox>

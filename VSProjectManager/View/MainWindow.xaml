@@ -130,10 +130,10 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Margin="1" Command="{Binding StartProject}" Style="{StaticResource CButton}" >Запустить проект в VS</Button>
-            <Button Margin="1" Command="{Binding OpenFolder}" Style="{StaticResource CButton}">Папка</Button>
-            <Button Margin="1" Command="{Binding OpenDebugFolder}" Style="{StaticResource CButton}">Debug</Button>
-            <Button Margin="1" Command="{Binding OpenReleaseFolder}" Style="{StaticResource CButton}">Release</Button>
+            <Button Margin="1" Command="{Binding StartProject}"  >Запустить проект в VS</Button>
+            <Button Margin="1" Command="{Binding OpenFolder}" >Папка</Button>
+            <Button Margin="1" Command="{Binding OpenDebugFolder}" >Debug</Button>
+            <Button Margin="1" Command="{Binding OpenReleaseFolder}" >Release</Button>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2" Style="{StaticResource mdd}">
             <ListBox  ItemsSource="{Binding ElementName=LB, Path=SelectedItem.Projects}" SelectedItem="{Binding SelectProject, Mode=TwoWay}" MaxHeight="198" Margin="1" Background="{StaticResource BaseColorBrush}" BorderBrush="{StaticResource BaseColorBrush}">
@@ -156,10 +156,10 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Margin="1" Command="{Binding StartProject}" Style="{StaticResource CButton}">Запустить проект в VS</Button>
-            <Button Margin="1" Command="{Binding OpenFolder}" Style="{StaticResource CButton}" >Папка</Button>
-            <Button Margin="1" Command="{Binding OpenDebugFolder}" Style="{StaticResource CButton}">Debug</Button>
-            <Button Margin="1" Command="{Binding OpenReleaseFolder}" Style="{StaticResource CButton}">Release</Button>
+            <Button Margin="1" Command="{Binding StartProject}" >Запустить проект в VS</Button>
+            <Button Margin="1" Command="{Binding OpenFolder}"  >Папка</Button>
+            <Button Margin="1" Command="{Binding OpenDebugFolder}" >Debug</Button>
+            <Button Margin="1" Command="{Binding OpenReleaseFolder}" >Release</Button>
         </StackPanel>
     </Grid>
 </Window>
